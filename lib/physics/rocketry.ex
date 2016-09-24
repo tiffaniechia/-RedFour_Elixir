@@ -1,16 +1,31 @@
 defmodule Converter do
-  def calculate_escape(%{mass: mass, radius: radius}) do
-    2 * 6.67e-11 * mass / radius
-      |> :math.sqrt
+  def rounded_to_nearest_tenth(val) do
+    Float.round(val, 1)
+  end
+  def to_km(velocity) do
+    velocity / 1000
   end
 
-  def convert_to_km(velocity) do
-    velocity / 1000
+  def to_light_seconds({:meters, meters} = val, precision: precision) do
+    meters * 3.335638620368e-9 |> round_up
+  end
+
+  def to_light_seconds({:miles, miles} = val, precision: precision) do
+    miles * 5.36819e-6 |> round_up
+  end
+
+  def round_up(val) when is_float(val) do
+    trunc(val)
   end
 end
 
 
 defmodule Physics.Rocketry do
+  def escape_velocity(:earth) do
+    %{mass: 5.972e24, radius: 6.371e6}
+      |> escape_velocity
+  end
+
   def escape_velocity(planet) when is_map(planet) do
     planet
       |> calculate_escape
@@ -18,7 +33,8 @@ defmodule Physics.Rocketry do
       |> Converter.rounded_to_nearest_tenth
   end
 
-  defp rounded_to_nearest_tenth(val) do
-    Float.ceil(val, 1)
+  defp calculate_escape(%{mass: mass, radius: radius}) do
+    2 * 6.67e-11 * mass / radius
+      |> :math.sqrt
   end
 end
