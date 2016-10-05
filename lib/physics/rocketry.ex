@@ -8,7 +8,7 @@ defmodule Physics.Rocketry do
 
   def escape_velocity(:mars), do: mars |> escape_velocity
 
-  def escape_velocity(:moon) do: moon |> escape_velocity
+  def escape_velocity(:moon), do: moon |> escape_velocity
 
   def escape_velocity(planet) when is_map(planet) do
     planet
@@ -17,8 +17,17 @@ defmodule Physics.Rocketry do
       |> to_nearest_tenth
   end
 
+  def orbital_speed(height) do
+    newtons_gravitational_constant * Planets.earth.mass / orbital_radius(height)
+      |> square_root
+  end
+
+  defp orbital_radius(height) do
+    Planets.earth.radius + (height |> to_meters)
+  end
+
   defp calculate_escape(%{mass: mass, radius: radius}) do
-    2 * newtons_gravitional_constant * mass / radius
+    2 * newtons_gravitational_constant * mass / radius
       |> square_root
   end
 end
