@@ -18,12 +18,12 @@ defmodule Physics.Rocketry do
   end
 
   def orbital_speed(height) do
-    newtons_gravitational_constant * Planets.earth.mass / orbital_radius(height)
+    newtons_gravitational_constant * earth.mass / orbital_radius(height)
       |> square_root
   end
 
   defp orbital_radius(height) do
-    Planets.earth.radius + (height |> to_meters)
+    earth.radius + (height |> to_meters)
   end
 
   defp calculate_escape(%{mass: mass, radius: radius}) do
