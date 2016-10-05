@@ -1,5 +1,5 @@
 defmodule Converter do
-  def rounded_to_nearest_tenth(val), do: Float.round(val, 1)
+  def to_nearest_tenth(val), do: Float.round(val, 1)
 
   def to_km(velocity), do: velocity / 1000
 

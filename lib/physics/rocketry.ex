@@ -13,8 +13,8 @@ defmodule Physics.Rocketry do
   def escape_velocity(planet) when is_map(planet) do
     planet
       |> calculate_escape
-      |> convert_to_km
-      |> rounded_to_nearest_tenth
+      |> to_km
+      |> to_nearest_tenth
   end
 
   defp calculate_escape(%{mass: mass, radius: radius}) do
