@@ -5,6 +5,7 @@ defmodule Converter do
 
   def to_meters(velocity), do: velocity * 1000
 
+  def to_light_seconds(arg), do: to_light_seconds(arg, precision: 5)
   def to_light_seconds({unit, val}, precision: precision) do
     case unit do
       :meters -> from_meters(val)
