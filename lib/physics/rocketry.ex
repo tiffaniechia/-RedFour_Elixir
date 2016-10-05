@@ -22,6 +22,10 @@ defmodule Physics.Rocketry do
       |> square_root
   end
 
+  def orbital_acceleration(height) do
+    (orbital_speed(height) |> squared) / orbital_radius(height)
+  end
+
   defp orbital_radius(height) do
     earth.radius + (height |> to_meters)
   end

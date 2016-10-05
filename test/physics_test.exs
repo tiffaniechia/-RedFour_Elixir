@@ -35,4 +35,9 @@ defmodule PhysicsTest do
     orbital_speed = Physics.Rocketry.orbital_speed(100)
     assert orbital_speed == 7845.797893364734
   end
+
+  test "Orbital acceleration for earth at 100km" do
+    orbital_acceleration = Physics.Rocketry.orbital_acceleration(100)
+    assert orbital_acceleration == 9.512678810620692
+  end
 end
